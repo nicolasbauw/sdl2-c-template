@@ -24,8 +24,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // The window is open: could enter program loop here (see SDL_PollEvent())
-
+    // The window is open: could enter program loop here
     SDL_Event e;
     int quit = 0;
     while (!quit){
