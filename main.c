@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
 
@@ -21,7 +22,7 @@ int main(int argc, char* argv[]) {
     if (window == NULL) {
         // In the case that the window could not be made...
         printf("Could not create window: %s\n", SDL_GetError());
-        return 1;
+        return EXIT_FAILURE;
     }
 
     // The window is open: could enter program loop here
@@ -46,5 +47,5 @@ int main(int argc, char* argv[]) {
 
     // Clean up
     SDL_Quit();
-    return 0;
+    return EXIT_SUCCESS;
 }
