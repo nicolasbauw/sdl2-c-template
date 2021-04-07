@@ -26,7 +26,21 @@ int main(int argc, char* argv[]) {
 
     // The window is open: could enter program loop here (see SDL_PollEvent())
 
-    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+    SDL_Event e;
+    int quit = 0;
+    while (!quit){
+        while (SDL_PollEvent(&e)){
+            if (e.type == SDL_QUIT){
+                quit = 1;
+            }
+            if (e.type == SDL_KEYDOWN){
+                quit = 1;
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN){
+                quit = 1;
+            }
+        }
+    }
 
     // Close and destroy the window
     SDL_DestroyWindow(window);
