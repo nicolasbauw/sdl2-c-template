@@ -38,6 +38,7 @@ struct WRenderP init() {
         &p.window,
         &p.renderer
     );
+    SDL_SetWindowTitle(p.window, "SDL2 App");
 
     return p;
 }
