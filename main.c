@@ -2,29 +2,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-SDL_Window* init();
+struct WRenderP {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+};
+
+struct WRenderP init();
 void quit(SDL_Window *window);
 void loop();
 
 int main(int argc, char* argv[]) {
 
-    SDL_Window* window;                    // Declare a pointer
+    struct WRenderP app_sdl_pointers;                    // Declare a pointer
+    app_sdl_pointers = init();
 
-    if ((window = init()) == NULL) {
+    if ((app_sdl_pointers.window) == NULL) {
         return EXIT_FAILURE;
     };
     
     loop();
 
-    quit(window);
+    quit(app_sdl_pointers.window);
     return EXIT_SUCCESS;
 }
 
-SDL_Window* init() {
+struct WRenderP init() {
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
+    struct WRenderP p;
 
     // Create an application window with the following settings:
-    return SDL_CreateWindow(
+    p.window = SDL_CreateWindow(
         "An SDL2 window",                  // window title
         SDL_WINDOWPOS_UNDEFINED,           // initial x position
         SDL_WINDOWPOS_UNDEFINED,           // initial y position
@@ -32,6 +39,8 @@ SDL_Window* init() {
         480,                               // height, in pixels
         SDL_WINDOW_SHOWN                   // flags - see below
     );
+
+    return p;
 }
 
 void quit(SDL_Window* window) {
