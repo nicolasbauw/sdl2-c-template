@@ -8,7 +8,7 @@ struct WRenderP {
 };
 
 struct WRenderP init();
-void quit(SDL_Window *window);
+void quit(struct WRenderP);
 void loop();
 
 int main(int argc, char* argv[]) {
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     
     loop();
 
-    quit(app_sdl_pointers.window);
+    quit(app_sdl_pointers);
     return EXIT_SUCCESS;
 }
 
@@ -31,21 +31,21 @@ struct WRenderP init() {
     struct WRenderP p;
 
     // Create an application window with the following settings:
-    p.window = SDL_CreateWindow(
-        "An SDL2 window",                  // window title
-        SDL_WINDOWPOS_UNDEFINED,           // initial x position
-        SDL_WINDOWPOS_UNDEFINED,           // initial y position
+    SDL_CreateWindowAndRenderer(     
         640,                               // width, in pixels
         480,                               // height, in pixels
-        SDL_WINDOW_SHOWN                   // flags - see below
+        SDL_WINDOW_SHOWN,                  // flags - see below
+        &p.window,
+        &p.renderer
     );
 
     return p;
 }
 
-void quit(SDL_Window* window) {
+void quit(struct WRenderP p) {
     // Close and destroy the window
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(p.renderer);
+    SDL_DestroyWindow(p.window);
 
     // Clean up
     SDL_Quit();
