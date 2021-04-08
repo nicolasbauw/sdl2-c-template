@@ -2,10 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int init(SDL_Window *window);
+void quit(SDL_Window *window);
+void loop();
+
 int main(int argc, char* argv[]) {
 
     SDL_Window *window;                    // Declare a pointer
 
+    if (init(window) == -1) {
+        return EXIT_FAILURE;
+    };
+    
+    loop();
+
+    quit(window);
+    return EXIT_SUCCESS;
+}
+
+int init(SDL_Window *window) {
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
     // Create an application window with the following settings:
@@ -22,9 +37,21 @@ int main(int argc, char* argv[]) {
     if (window == NULL) {
         // In the case that the window could not be made...
         printf("Could not create window: %s\n", SDL_GetError());
-        return EXIT_FAILURE;
+        return -1;
     }
 
+    return 0;
+}
+
+void quit(SDL_Window *window) {
+    // Close and destroy the window
+    SDL_DestroyWindow(window);
+
+    // Clean up
+    SDL_Quit();
+}
+
+void loop() {
     // The window is open: could enter program loop here
     SDL_Event e;
     int quit = 0;
@@ -41,11 +68,4 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-
-    // Close and destroy the window
-    SDL_DestroyWindow(window);
-
-    // Clean up
-    SDL_Quit();
-    return EXIT_SUCCESS;
 }
