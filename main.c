@@ -34,7 +34,7 @@ struct WRenderP init() {
     SDL_CreateWindowAndRenderer(     
         640,                               // width, in pixels
         480,                               // height, in pixels
-        SDL_WINDOW_SHOWN,                  // flags - see below
+        SDL_WINDOW_SHOWN|SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC,
         &p.window,
         &p.renderer
     );
