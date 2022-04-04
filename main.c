@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     };
     
+    // The window is opened : entering program loop
     loop(app_sdl_pointers);
 
     quit(app_sdl_pointers);
@@ -52,7 +53,6 @@ void quit(struct WRenderP p) {
 }
 
 void loop(struct WRenderP p) {
-    // The window is open: could enter program loop here
     SDL_Event e;
     int quit = 0;
     while (!quit){
