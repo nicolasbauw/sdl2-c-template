@@ -1,8 +1,15 @@
 CC = clang
-LDFLAGS = `pkg-config --libs --cflags sdl2`
+LDFLAGS = `pkg-config --libs sdl2`
+INCFLAGS = `pkg-config --cflags sdl2`
 
-all:
-	$(CC) -o test main.c $(LDFLAGS)
+all: main.o square.o
+	$(CC) -o sdltest main.o square.o $(LDFLAGS)
+
+main.o:
+	$(CC) -c main.c $(INCFLAGS)
+
+square.o:
+	$(CC) -c square.c $(INCFLAGS)
 
 clean:
-	rm test
+	rm sdltest main.o square.o
